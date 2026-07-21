@@ -373,6 +373,6 @@ Rust 后端统一处理各平台路径差异：
 
 ## License
 
-MIT License
+Apache-2.0 License
 
 本项目内置的巡检脚本版权归原作者所有，各自遵循其原始开源协议。
