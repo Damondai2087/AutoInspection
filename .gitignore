@@ -20,7 +20,8 @@ src-tauri/target/
 # Built-in Portable Python
 # (large binary, fetched via scripts/fetch_python.sh before build)
 # ====================================
-src-tauri/resources/python/
+src-tauri/resources/python/*
+!src-tauri/resources/python/placeholder
 
 # ====================================
 # Python Cache
