@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc
+          - platform: macos-latest
+            target: aarch64-apple-darwin
+          - platform: ubuntu-22.04
+            target: x86_64-unknown-linux-gnu
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev \
+            librsvg2-dev patchelf libssl-dev libgtk-3-dev \
+            libjavascriptcoregtk-4.1-dev libsoup-3.0-dev
+
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch portable Python (Windows only)
+        if: runner.os == 'Windows'
+        run: bash scripts/fetch_python.sh
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'AutoInspection v__VERSION__'
+          releaseBody: |
+            AutoInspection — 跨平台主机自动巡检桌面客户端
+
+            ### 核心能力
+            - **本机巡检**：一键检测 Windows / Linux 主机健康状态
+            - **远程巡检**：SSH 远程执行 Linux 主机巡检
+            - **实时日志**：执行过程逐行推送，不等到结束才显示
+            - **报告预览**：HTML 报告内嵌渲染，支持导出 Markdown / TXT
+            - **历史管理**：历次巡检记录归档、预览、删除
+
+            ### 技术特性
+            - Rust + Tauri v2 构建，单可执行文件，无运行时依赖
+            - Windows 巡检内置便携 Python，无需用户安装
+            - 浅色 / 深色双主题，自动适配系统偏好
+
+            ### 系统支持
+            | 平台 | 本机巡检 | 远程巡检 |
+            |------|:---:|:---:|
+            | Windows (x64) | ✅ | 规划中 |
+            | Linux (x64) | ✅ | ✅ SSH |
+            | macOS (ARM) | 规划中 | 规划中 |
+          releaseDraft: true
+          prerelease: false
+          args: --target ${{ matrix.target }}

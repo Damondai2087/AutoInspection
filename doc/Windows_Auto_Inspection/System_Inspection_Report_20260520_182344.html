@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Windows 系统巡检报告 - liuge</title>
+<style>
+@page{margin:20mm 15mm}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Microsoft YaHei','Segoe UI',sans-serif;background:#eef0f2;color:#2c2c2c;line-height:1.7;font-size:13px}
+.ct{max-width:1020px;margin:0 auto;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+
+/* ---- 封面 ---- */
+.cover{padding:0;border-bottom:1px solid #e0e0e0}
+.cover-title{background:#3c3c3c;padding:32px 50px 24px}
+.cover-title h1{font-size:22px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:2px}
+.cover-title .sub{font-size:13px;color:#aaa;margin:0}
+.cover-meta{padding:20px 50px 24px}
+.cover table{width:auto;border:none;margin:0;font-size:13px;border-collapse:separate;border-spacing:0}
+.cover td{border:none;padding:3px 0;color:#555;vertical-align:top;white-space:nowrap}
+.cover td:first-child{font-weight:600;color:#1d1d1d;width:90px;padding-right:20px}
+.cover td:last-child{color:#444}
+.cover .risk{font-weight:700;color:#ea4335}
+
+/* ---- 目录 ---- */
+.toc{background:#f7f8f9;padding:12px 50px;border-bottom:1px solid #e0e0e0;display:flex;flex-wrap:wrap;gap:0}
+.toc a{color:#555;text-decoration:none;font-size:12px;padding:3px 18px 3px 0;white-space:nowrap}
+.toc a:hover{color:#1a73e8}
+
+/* ---- 正文 ---- */
+.body{padding:6px 50px 30px}
+
+/* 一级标题 - 深灰通栏 */
+h2{font-size:14px;color:#fff;background:#3c3c3c;margin:24px -50px 14px;padding:9px 50px;letter-spacing:.5px;font-weight:600}
+
+/* 二级标题 */
+h3{font-size:13px;color:#1d1d1d;margin:16px 0 6px;padding-left:10px;border-left:3px solid #3c3c3c;font-weight:600}
+
+/* ---- 表格 ---- */
+table{width:100%;border-collapse:collapse;margin:6px 0 16px;font-size:12.5px}
+th{background:#f2f3f5;color:#555;font-size:12px;font-weight:600;text-align:left;padding:7px 12px;border:1px solid #dfe1e5}
+td{padding:6px 12px;border:1px solid #dfe1e5;vertical-align:top}
+tr:nth-child(even){background:#fafafa}
+.kv td:first-child{background:#f2f3f5;font-weight:600;color:#444;width:160px;white-space:nowrap}
+
+/* ---- 标签 ---- */
+.badge{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:600;color:#fff}
+.g{background:#34a853}.y{background:#e8a000}.r{background:#d93025}.b{background:#1a73e8}.gr{background:#9aa0a6}
+
+/* 风险框 */
+.risk-box{display:inline-block;border:2px solid #ea4335;border-radius:4px;padding:5px 16px;margin:6px 0}
+.risk-box .level{font-size:16px;font-weight:700;color:#ea4335}
+
+/* 资源卡片 */
+.summary-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.sc{background:#f7f8f9;border:1px solid #e8e8e8;border-radius:4px;padding:10px 12px;text-align:center}
+.sc .v{font-size:16px;font-weight:700;color:#2c2c2c}.sc .l{font-size:11px;color:#888;margin-top:2px}
+
+/* ---- 目录 ---- */
+.toc-section{padding:30px 50px;border-bottom:1px solid #e0e0e0}
+.toc-section h2{background:none;color:#1d1d1d;margin:0 0 16px;padding:0 0 8px;font-size:15px;border-bottom:2px solid #3c3c3c}
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;counter-reset:toc}
+.toc-item{display:flex;align-items:baseline;padding:7px 0;border-bottom:1px dashed #ddd;text-decoration:none;color:#2c2c2c;font-size:13px;transition:color .15s}
+.toc-item:hover{color:#1a73e8}
+.toc-item .num{display:inline-block;width:28px;font-weight:700;color:#3c3c3c;flex-shrink:0}
+.toc-item .dots{flex:1;border-bottom:1px dotted #ccc;margin:0 8px;height:1px;align-self:center}
+.toc-item .page{font-size:12px;color:#999;flex-shrink:0}
+
+/* ---- 页脚 ---- */
+.footer{background:#3c3c3c;color:#999;font-size:11px;padding:16px 50px;text-align:center;line-height:1.8}
+.footer b{color:#ddd}
+</style></head><body><div class="ct">
+
+<!-- ===== 封面 ===== -->
+<div class="cover">
+<div class="cover-title">
+<h1>Windows 系统巡检报告</h1>
+<div class="sub">liuge &nbsp;/&nbsp; Windows 11 (v10.0.22631)</div>
+</div>
+<div class="cover-meta">
+<table>
+<tr><td>巡检日期</td><td>2026-05-20</td></tr>
+<tr><td>日志范围</td><td>2026-05-09 ~ 2026-05-20</td></tr>
+<tr><td>报告生成</td><td>2026-05-20 18:22:51</td></tr>
+<tr><td>日志来源</td><td>本机实时采集 (System / Application / Security)</td></tr>
+<tr><td>巡检人员</td><td>liuge\刘哥聊技术</td></tr>
+<tr><td>综合风险</td><td class="risk">高</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ===== 目录 ===== -->
+<div class="toc-section">
+<h2>目 录</h2>
+<div class="toc-grid">
+<a class="toc-item" href="#s1"><span class="num">一</span>目标主机基本信息<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s2"><span class="num">二</span>硬件资源状态<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s3"><span class="num">三</span>网络配置与连接<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s4"><span class="num">四</span>安全配置审计<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s5"><span class="num">五</span>用户与权限<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s6"><span class="num">六</span>进程与服务分析<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s7"><span class="num">七</span>启动项与计划任务<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s8"><span class="num">八</span>已安装软件<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s9"><span class="num">九</span>事件日志分析<span class="dots"></span><span class="page"></span></a>
+<a class="toc-item" href="#s10"><span class="num">十</span>风险评估与建议<span class="dots"></span><span class="page"></span></a>
+</div>
+</div>
+<div class="body">
+<h2 id="s1"><span>一</span>、目标主机基本信息</h2>
+<table class="kv">
+<tr><td>计算机名</td><td>liuge</td></tr>
+<tr><td>操作系统</td><td>Windows 11 (v10.0.22631)</td></tr>
+<tr><td>系统架构</td><td>64bit AMD64</td></tr>
+<tr><td>域/工作组</td><td>liuge</td></tr>
+<tr><td>当前用户</td><td>liuge\刘哥聊技术</td></tr>
+<tr><td>主板/机型</td><td>LENOVO 21CY</td></tr>
+<tr><td>BIOS</td><td>LENOVO | HYCN42WW | 2023-01-14</td></tr>
+<tr><td>安全启动</td><td>不支持/Legacy BIOS</td></tr>
+<tr><td>许可证</td><td>已授权 (未知)，过期: N/A</td></tr>
+<tr><td>运行时间</td><td>0天 9时 15分（启动于 2026-05-20 09:07:45）</td></tr>
+<tr><td>电源计划</td><td>高性能</td></tr>
+<tr><td>时间同步</td><td>异常/未配置，源: 无法获取</td></tr>
+</table>
+<h2 id="s2"><span>二</span>、硬件资源状态</h2>
+<div class="summary-cards">
+<div class="sc"><div class="v"><div style="background:#e0e0e0;border-radius:4px;height:18px;width:80px;display:inline-block;vertical-align:middle"><div style="background:#34a853;height:100%;width:1.0%;border-radius:4px"></div></div> <b>1.0%</b></div><div class="l">CPU 使用率</div></div>
+<div class="sc"><div class="v"><div style="background:#e0e0e0;border-radius:4px;height:18px;width:80px;display:inline-block;vertical-align:middle"><div style="background:#ea4335;height:100%;width:92.8%;border-radius:4px"></div></div> <b>92.8%</b></div><div class="l">内存 29.45GB / 31.73GB</div></div>
+<div class="sc"><div class="v"><div style="background:#e0e0e0;border-radius:4px;height:18px;width:80px;display:inline-block;vertical-align:middle"><div style="background:#ea4335;height:100%;width:99.1%;border-radius:4px"></div></div> <b>99.1%</b></div><div class="l">磁盘最高使用率</div></div>
+</div>
+<h3>2.1 处理器</h3>
+<table class="kv">
+<tr><td>CPU</td><td>12th Gen Intel(R) Core(TM) i7-12700H</td></tr>
+<tr><td>核心/线程</td><td>14 核 / 20 线程 @ 2300 MHz</td></tr>
+<tr><td>当前负载</td><td>1%</td></tr>
+</table>
+<h3>2.2 内存</h3>
+<table><tr><th>制造商</th><th>容量</th><th>频率</th><th>型号</th></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+<tr><td>Samsung</td><td>4GB</td><td>6400MHz</td><td>K3LKCKC@BM-MGCP</td></tr>
+</table>
+<h3>2.3 磁盘存储</h3>
+<table><tr><th>盘符</th><th>卷标</th><th>总容量</th><th>可用</th><th>已用</th><th>使用率</th></tr>
+<tr><td><b>C:</b></td><td>Windows-SSD</td><td>200 GB</td><td>1.8 GB</td><td>198.2 GB</td><td><div style="background:#e0e0e0;border-radius:4px;height:18px;width:80px;display:inline-block;vertical-align:middle"><div style="background:#ea4335;height:100%;width:99.1%;border-radius:4px"></div></div> <b>99.1%</b></td></tr>
+<tr><td><b>D:</b></td><td>Data</td><td>1660.8 GB</td><td>166.6 GB</td><td>1494.2 GB</td><td><div style="background:#e0e0e0;border-radius:4px;height:18px;width:80px;display:inline-block;vertical-align:middle"><div style="background:#ea4335;height:100%;width:90.0%;border-radius:4px"></div></div> <b>90.0%</b></td></tr>
+</table>
+<h3>2.4 物理磁盘健康</h3>
+<table><tr><th>名称</th><th>类型</th><th>容量</th><th>总线</th><th>健康状态</th></tr>
+<tr><td>CT2000P2SSD8</td><td>SSD</td><td>1863GB</td><td>NVMe</td><td><span class="badge g">健康</span></td></tr>
+</table>
+<h3>2.5 GPU</h3>
+<table class="kv">
+<tr><td>显卡</td><td>OrayIddDriver Device
+
+NVIDIA GeForce RTX 2050
+
+Intel(R) Iris(R) Xe Graphics</td></tr>
+<tr><td>驱动版本</td><td>17.1.58.818
+
+31.0.15.3188
+
+31.0.101.4502</td></tr>
+<tr><td>未签名驱动</td><td>2 个</td></tr>
+</table>
+<h2 id="s3"><span>三</span>、网络配置与连接</h2>
+<h3>3.1 网络适配器</h3>
+<table><tr><th>适配器</th><th>状态</th><th>速率</th><th>MAC 地址</th></tr>
+<tr><td>以太网 2</td><td><span class="badge gr">Disconnected</span></td><td>0 bps</td><td><code>98-8F-E0-6D-E6-75</code></td></tr>
+<tr><td>WLAN</td><td><span class="badge g">Up</span></td><td>1.2 Gbps</td><td><code>B0-3C-DC-B5-7F-75</code></td></tr>
+</table>
+<h3>3.2 IP 地址分配</h3>
+<table><tr><th>适配器</th><th>IPv4 地址</th><th>子网</th><th>来源</th></tr>
+<tr><td>aTrustVNIC</td><td><b>10.199.192.25</b></td><td>/24</td><td>手动</td></tr>
+<tr><td>VirtualNet</td><td><b>9.9.201.57</b></td><td>/16</td><td>手动</td></tr>
+<tr><td>WLAN</td><td><b>192.168.22.254</b></td><td>/24</td><td>DHCP</td></tr>
+<tr><td>以太网 2</td><td><b>192.168.0.115</b></td><td>/23</td><td>手动</td></tr>
+</table>
+<table class="kv"><tr><td>默认网关</td><td>192.168.22.1</td></tr>
+<tr><td>DNS 服务器</td><td>192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 127.0.0.1, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 10.160.100.251, 10.160.100.252, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 192.168.150.254, 127.0.0.1, 127.0.0.1, 172.20.0.10, 10.160.100.251, 10.160.100.252, 202.96.128.166</td></tr>
+<tr><td>网络流量</td><td>接收 1.34 GB / 发送 2.70 GB</td></tr>
+<tr><td>连接统计</td><td>已建立 236 | 监听 71 | TIME_WAIT 305</td></tr>
+</table>
+<h3>3.3 监听端口</h3>
+<table><tr><th>端口</th><th>进程</th><th>监听范围</th><th>说明</th></tr>
+<tr><td><b>135</b></td><td>svchost</td><td>全部</td><td style="color:#666">RPC端点映射</td></tr>
+<tr><td><b>139</b></td><td>System</td><td>192.168.22.254</td><td style="color:#666">NetBIOS会话</td></tr>
+<tr><td><b>445</b></td><td>System</td><td>全部</td><td style="color:#666">SMB文件共享</td></tr>
+<tr><td><b>4709</b></td><td>wpscloudsvr</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>5040</b></td><td>svchost</td><td>全部</td><td style="color:#666">Windows推送通知</td></tr>
+<tr><td><b>5836</b></td><td>WXWork</td><td>192.168.22.254</td><td style="color:#666"></td></tr>
+<tr><td><b>7680</b></td><td>svchost</td><td>全部</td><td style="color:#666">传递优化(WUDO)</td></tr>
+<tr><td><b>7897</b></td><td>verge-mihomo</td><td>本机</td><td style="color:#666">Clash代理</td></tr>
+<tr><td><b>10000</b></td><td>SangforPromoteService</td><td>本机</td><td style="color:#666">百度网盘云检测</td></tr>
+<tr><td><b>14013</b></td><td>Weixin</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>14016</b></td><td>Weixin</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>14019</b></td><td>Weixin</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>14022</b></td><td>Weixin</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>14023</b></td><td>Weixin</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>30629</b></td><td>aTrustTray</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>33331</b></td><td>clash-verge</td><td>本机</td><td style="color:#666">Clash Verge</td></tr>
+<tr><td><b>35421</b></td><td>HillstoneSecureConnectService</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>41002</b></td><td>aTrustXtunnel</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>42950</b></td><td>ApifoxAppAgent</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>49664</b></td><td>lsass</td><td>全部</td><td style="color:#666">系统服务(动态)</td></tr>
+<tr><td><b>49665</b></td><td>wininit</td><td>全部</td><td style="color:#666">系统服务(动态)</td></tr>
+<tr><td><b>49666</b></td><td>svchost</td><td>全部</td><td style="color:#666">系统服务(动态)</td></tr>
+<tr><td><b>49667</b></td><td>svchost</td><td>全部</td><td style="color:#666">系统服务(动态)</td></tr>
+<tr><td><b>49672</b></td><td>dbeaver</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>49684</b></td><td>spoolsv</td><td>全部</td><td style="color:#666">系统服务(动态)</td></tr>
+<tr><td><b>49687</b></td><td>jhi_service</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>49733</b></td><td>services</td><td>全部</td><td style="color:#666"></td></tr>
+<tr><td><b>49797</b></td><td>YunShu</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td><b>49807</b></td><td>YunShu</td><td>全部</td><td style="color:#666"></td></tr>
+<tr><td><b>49808</b></td><td>YunShu</td><td>本机</td><td style="color:#666"></td></tr>
+<tr><td colspan="4" style="color:#888">... 共 56 个端口</td></tr>
+</table>
+<h3>3.4 共享文件夹</h3>
+<table><tr><th>名称</th><th>路径</th><th>说明</th><th>连接数</th></tr>
+<tr><td>ADMIN$</td><td>C:\WINDOWS</td><td>远程管理</td><td>0</td></tr>
+<tr><td>C$</td><td>C:\</td><td>默认共享</td><td>0</td></tr>
+<tr><td>D$</td><td>D:\</td><td>默认共享</td><td>0</td></tr>
+<tr><td>HP LaserJet MFP M227-M231 PCL-6 (V4)</td><td>HP LaserJet MFP M227-M231 PCL-6 (V4),LocalsplOnly</td><td>HP LaserJet MFP M227-M231 PCL-6 (V4)</td><td>0</td></tr>
+<tr><td>IPC$</td><td></td><td>远程 IPC</td><td>0</td></tr>
+<tr><td>print$</td><td>C:\WINDOWS\system32\spool\drivers</td><td>打印机驱动程序</td><td>0</td></tr>
+<tr><td>公司打印机</td><td>公司打印机,LocalsplOnly</td><td>公司打印机</td><td>0</td></tr>
+</table>
+<h2 id="s4"><span>四</span>、安全配置审计</h2>
+<h3>4.1 防护状态</h3>
+<table class="kv">
+<tr><td>防火墙</td><td><span class="badge g">域=ON  专用=ON  公用=ON</span></td></tr>
+<tr><td>远程桌面 (RDP)</td><td>已禁用（NLA: 已禁用，端口: 3389）</td></tr>
+<tr><td>BitLocker 加密</td><td>未启用/不可用</td></tr>
+<tr><td>审计策略</td><td>需要管理员权限查看</td></tr>
+</table>
+<h3>4.2 密码策略</h3>
+<table class="kv">
+<tr><td>超时后强制注销</td><td>Never</td></tr>
+<tr><td>密码最短使用期限(天)</td><td>0</td></tr>
+<tr><td>密码最长使用期限(天)</td><td>42</td></tr>
+<tr><td>密码最短长度</td><td>0</td></tr>
+<tr><td>密码历史记录长度</td><td>None</td></tr>
+<tr><td>账户锁定阈值(次)</td><td>Never</td></tr>
+<tr><td>账户锁定时长(分钟)</td><td>30</td></tr>
+<tr><td>锁定观察窗口(分钟)</td><td>30</td></tr>
+<tr><td>计算机角色</td><td>WORKSTATION</td></tr>
+</table>
+<h3>4.3 系统更新</h3>
+<table><tr><th>补丁号</th><th>类型</th><th>安装日期</th></tr>
+<tr><td><b>KB5068865</b></td><td>Security Update</td><td>2026-01-10</td></tr>
+<tr><td><b>KB5068070</b></td><td>Update</td><td>2026-01-08</td></tr>
+<tr><td><b>KB5066133</b></td><td>Update</td><td>2025-10-15</td></tr>
+<tr><td><b>KB5027397</b></td><td>Update</td><td>2024-03-02</td></tr>
+<tr><td><b>KB5012170</b></td><td>Security Update</td><td>2022-12-07</td></tr>
+</table>
+<h3>4.4 系统维护</h3>
+<table class="kv">
+<tr><td>时间同步</td><td><span style="background:#f9ab00;color:#fff;padding:2px 10px;border-radius:4px;font-size:12px;font-weight:600">异常/未配置</span>  源: 无法获取</td></tr>
+<tr><td>系统还原点</td><td>不可用 个</td></tr>
+<tr><td>电源计划</td><td>高性能</td></tr>
+</table>
+<h2 id="s5"><span>五</span>、用户与权限</h2>
+<h3>5.1 本地用户账户</h3>
+<table><tr><th>用户名</th><th>启用</th><th>最后登录</th></tr>
+<tr><td>Administrator</td><td><span class="badge gr">否</span></td><td>06/27/2022 19:24:48</td></tr>
+<tr><td>CodexSandboxOffline</td><td><span class="badge g">是</span></td><td>05/20/2026 00:23:39</td></tr>
+<tr><td>CodexSandboxOnline</td><td><span class="badge g">是</span></td><td></td></tr>
+<tr><td>DefaultAccount</td><td><span class="badge gr">否</span></td><td></td></tr>
+<tr><td>Guest</td><td><span class="badge gr">否</span></td><td></td></tr>
+<tr><td>WDAGUtilityAccount</td><td><span class="badge gr">否</span></td><td></td></tr>
+<tr><td>刘哥聊技术</td><td><span class="badge g">是</span></td><td>05/20/2026 15:35:51</td></tr>
+</table>
+<h3>5.2 管理员组成员</h3>
+<p style="padding:8px 0">liuge\Administrator, liuge\刘哥聊技术</p>
+<h2 id="s6"><span>六</span>、进程与服务分析</h2>
+<p>当前进程数: <b>409</b> &nbsp;|&nbsp; 运行中服务: <b>150</b></p>
+<h3>6.1 内存占用 Top 10</h3>
+<table><tr><th>进程名</th><th>内存占用</th></tr>
+<tr><td>idea64.exe</td><td><b>4122</b> MB</td></tr>
+<tr><td>XTerminal.exe</td><td><b>2963</b> MB</td></tr>
+<tr><td>dbeaver.exe</td><td><b>689</b> MB</td></tr>
+<tr><td>Everything.exe</td><td><b>612</b> MB</td></tr>
+<tr><td>msedge.exe</td><td><b>579</b> MB</td></tr>
+<tr><td>explorer.exe</td><td><b>540</b> MB</td></tr>
+<tr><td>Weixin.exe</td><td><b>482</b> MB</td></tr>
+<tr><td>MsMpEng.exe</td><td><b>481</b> MB</td></tr>
+<tr><td>chrome.exe</td><td><b>480</b> MB</td></tr>
+<tr><td>dwm.exe</td><td><b>451</b> MB</td></tr>
+</table>
+<h2 id="s7"><span>七</span>、启动项与计划任务</h2>
+<h3>7.1 注册表启动项</h3>
+<table><tr><th>名称</th><th>命令</th></tr>
+<tr><td><b>SecurityHealth</b></td><td style="font-size:12px;word-break:break-all">C:\WINDOWS\system32\SecurityHealthSystray.exe</td></tr>
+<tr><td><b>RtkAudUService</b></td><td style="font-size:12px;word-break:break-all">&quot;C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_04ff63d068f8c6...</td></tr>
+<tr><td><b>Everything</b></td><td style="font-size:12px;word-break:break-all">&quot;D:\LenovoSoftstore\Everything\Everything.exe&quot; -startup</td></tr>
+<tr><td><b>ApifoxAppAgent</b></td><td style="font-size:12px;word-break:break-all">C:\Users\刘哥聊技术\AppData\Roaming\apifox\ApifoxAppAgent.exe</td></tr>
+<tr><td><b>org.yuanli.utools</b></td><td style="font-size:12px;word-break:break-all">C:\Users\刘哥聊技术\AppData\Local\Programs\utools\uTools.exe</td></tr>
+<tr><td><b>sesvc</b></td><td style="font-size:12px;word-break:break-all">&quot;d:\program files (x86)\360liulanqi\360se6\application\components\sesvc\sesvc.exe&quot; /b:1...</td></tr>
+<tr><td><b>Claude</b></td><td style="font-size:12px;word-break:break-all">&quot;C:\Users\刘哥聊技术\AppData\Local\AnthropicClaude\claude.exe&quot; --startup</td></tr>
+<tr><td><b>360huabao</b></td><td style="font-size:12px;word-break:break-all">C:\Users\刘哥聊技术\AppData\Roaming\360huabao\360huabao.exe /hb:5 /from:2</td></tr>
+<tr><td><b>Docker Desktop</b></td><td style="font-size:12px;word-break:break-all">C:\Program Files\Docker\Docker\Docker Desktop.exe</td></tr>
+<tr><td><b>QuarkCloudDriveUpdaterTaskUser1.0.0.7</b></td><td style="font-size:12px;word-break:break-all">&quot;C:\Users\刘哥聊技术\AppData\Local\QuarkCloudDriveUpdater\QuarkCloudDriveUpdater\1.0.0.7\updat...</td></tr>
+</table>
+<h3>7.2 计划任务（非微软，共 199 个）</h3>
+<table><tr><th>任务名</th><th>状态</th><th>操作</th></tr>
+<tr><td>360ZipUpdater</td><td>Ready</td><td style="font-size:12px;word-break:break-all">D:\LenovoSoftstore\360\360zip\360zipUpdate.exe</td></tr>
+<tr><td>360ZipUpdaterLoop</td><td>Ready</td><td style="font-size:12px;word-break:break-all">D:\LenovoSoftstore\360\360zip\360zipUpdate.exe</td></tr>
+<tr><td>HPLJCustParticipation</td><td>Ready</td><td style="font-size:12px;word-break:break-all">&quot;C:\Program Files (x86)\HP\HPLJUT\HPLJUTSCH.exe&quot;</td></tr>
+<tr><td>NvDriverUpdateCheckDaily_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\NVIDIA Corporation\NvContainer\nvcontainer.exe</td></tr>
+<tr><td>NVIDIA GeForce Experience SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">&quot;C:\Program Files\NVIDIA Corporation\NVIDIA GeForce Experience\NVID...</td></tr>
+<tr><td>NvNodeLauncher_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files (x86)\NVIDIA Corporation\NvNode\nvnodejslauncher.exe</td></tr>
+<tr><td>NvTmRep_CrashReport1_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\NVIDIA Corporation\NvBackend\NvTmRep.exe</td></tr>
+<tr><td>NvTmRep_CrashReport2_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\NVIDIA Corporation\NvBackend\NvTmRep.exe</td></tr>
+<tr><td>NvTmRep_CrashReport3_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\NVIDIA Corporation\NvBackend\NvTmRep.exe</td></tr>
+<tr><td>NvTmRep_CrashReport4_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\NVIDIA Corporation\NvBackend\NvTmRep.exe</td></tr>
+<tr><td>User_Feed_Synchronization-{BD619534-7AFD-459F-972F-7141E2722D76}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">by user disabled</td></tr>
+<tr><td>WpsUpdateLogonTask_刘哥聊技术</td><td>Ready</td><td style="font-size:12px;word-break:break-all">D:\LenovoSoftstore\WPS Office\WPS Office\ksolaunch.exe</td></tr>
+<tr><td>WpsUpdateTask_刘哥聊技术</td><td>Ready</td><td style="font-size:12px;word-break:break-all">D:\LenovoSoftstore\WPS Office\WPS Office\ksolaunch.exe</td></tr>
+<tr><td>WpsWakeWnsLogonTask</td><td>Ready</td><td style="font-size:12px;word-break:break-all">by user disabled</td></tr>
+<tr><td>ZoomUpdateTaskUser-S-1-5-21-965057581-1656868683-1341720616-1001</td><td>Ready</td><td style="font-size:12px;word-break:break-all">by user disabled</td></tr>
+<tr><td>Printer Health Monitor</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\HPPrintScanDoctor\HPPrinterHealthMonitor.exe</td></tr>
+<tr><td>Printer Health Monitor Logon</td><td>Ready</td><td style="font-size:12px;word-break:break-all">C:\Program Files\HPPrintScanDoctor\HPPrinterHealthMonitor.exe</td></tr>
+<tr><td>Lenovo UDC Diagnostic Scan</td><td>Ready</td><td style="font-size:12px;word-break:break-all">%windir%\system32\sc.exe</td></tr>
+<tr><td>Lenovo UDC Idle Monitor</td><td>Ready</td><td style="font-size:12px;word-break:break-all">UDCUserAgent.exe</td></tr>
+<tr><td>QuarkCloudDriveUpdaterTaskUser1.0.0.7{E230E55B-B147-4E75-A88F-590C9A99EB59}</td><td>Ready</td><td style="font-size:12px;word-break:break-all">&quot;C:\Users\刘哥聊技术\AppData\Local\QuarkCloudDriveUpdater\QuarkCloudDriveU...</td></tr>
+</table>
+<h2 id="s8"><span>八</span>、已安装软件（共 258 个）</h2>
+<table><tr><th>名称</th><th>版本</th><th>发布者</th><th>安装日期</th></tr>
+<tr><td>Qzone相册极速上传工具</td><td></td><td></td><td>2022-07-30</td></tr>
+<tr><td>联想账号</td><td></td><td></td><td>2022-06-07</td></tr>
+<tr><td>360 Zip</td><td>1.0.0.1041</td><td>360安全中心</td><td></td></tr>
+<tr><td>360安全卫士</td><td>14.0.2.1004</td><td>360安全中心</td><td></td></tr>
+<tr><td>360压缩</td><td>4.0.0.1680</td><td>360安全中心</td><td></td></tr>
+<tr><td>Anytxt Searcher 1.3</td><td></td><td>CBEWIN</td><td>2025-04-25</td></tr>
+<tr><td>Apifox 2.8.26</td><td>2.8.26</td><td>Apifox Team</td><td></td></tr>
+<tr><td>aTrust</td><td>2.5.10.21</td><td>Sangfor Technologies </td><td></td></tr>
+<tr><td>AutoClaw</td><td>0.3.0</td><td>ZhipuAI</td><td></td></tr>
+<tr><td>Axure RP 9</td><td>9.0.0.3728</td><td>Axure Software Solutions, Inc.</td><td></td></tr>
+<tr><td>Axure RP 9</td><td>9.0.0.3728</td><td>Axure Software Solutions, Inc.</td><td>2022-08-02</td></tr>
+<tr><td>Billfish</td><td>3.0.33.8</td><td>Billfish Co., Ltd.</td><td>2023-09-07</td></tr>
+<tr><td>bl</td><td>1.0.0</td><td>Your Company Name</td><td>2022-09-02</td></tr>
+<tr><td>CC Switch</td><td>3.14.1</td><td>ccswitch</td><td>2026-05-06</td></tr>
+<tr><td>Clash Verge</td><td>2.5.0</td><td>Clash Verge Rev</td><td></td></tr>
+<tr><td>CR VideoMate 1.8.1.5</td><td>1.8.1.5</td><td>CR-Soft</td><td>2023-08-20</td></tr>
+<tr><td>Cursor</td><td>2.0.77</td><td>Anysphere</td><td>2025-11-14</td></tr>
+<tr><td>DBeaver 26.0.5</td><td>26.0.5</td><td>DBeaver Corp</td><td></td></tr>
+<tr><td>Docker Desktop</td><td>4.72.0</td><td>Docker Inc.</td><td></td></tr>
+<tr><td>EasyConnect</td><td>7,6,7,201</td><td>Sangfor Technologies Inc.</td><td></td></tr>
+<tr><td>Everything 1.4.1.1026 (x86)</td><td>1.4.1.1026</td><td>voidtools</td><td></td></tr>
+<tr><td>Everything 1.4.1.1029 (x64)</td><td>1.4.1.1029</td><td>voidtools</td><td></td></tr>
+<tr><td>EV录屏</td><td>5.3.4</td><td>湖南一唯信息科技有限公司</td><td>2025-04-17</td></tr>
+<tr><td>FileZilla 3.67.1</td><td>3.67.1</td><td>Tim Kosse</td><td></td></tr>
+<tr><td>Git</td><td>2.54.0</td><td>The Git Development Community</td><td>2026-05-12</td></tr>
+<tr><td colspan="4" style="color:#888">... 共 258 个，仅显示前 25 个</td></tr>
+</table>
+<h2 id="s9"><span>九</span>、事件日志安全分析</h2>
+<p style="margin-bottom:10px;font-size:13px"><b>系统日志</b>: 共 <b>200</b> 条错误，7 类事件，时间范围 2026-05-19 13:09 ~ 2026-05-20 07:02</p>
+<table>
+<tr><th style="min-width:200px">问题</th><th style="width:60px">次数</th><th style="width:70px">严重程度</th><th>时间范围</th><th>说明</th></tr>
+<tr><td style="font-size:12px">Schannel (Event 36871)</td><td style="text-align:center"><b>186</b></td><td style="text-align:center"><span class="badge y">中</span></td><td style="font-size:12px;white-space:nowrap">2026-05-19 13:09</td><td style="font-size:12px">A fatal error occurred while creating a TLS 客户端 credential. The internal error state is 10013.</td></tr>
+<tr><td style="font-size:12px">Service Control Manager (Event 7000)</td><td style="text-align:center"><b>6</b></td><td style="text-align:center"><span class="badge r">高</span></td><td style="font-size:12px;white-space:nowrap">2026-05-19 21:08</td><td style="font-size:12px">服务启动失败，需排查服务依赖和配置</td></tr>
+<tr><td style="font-size:12px">Microsoft-Windows-TPM-WMI (Event 1801)</td><td style="text-align:center"><b>3</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-19 21:13</td><td style="font-size:12px">Secure Boot CA/keys need to be updated. This device signature information is included here.</td></tr>
+<tr><td style="font-size:12px">Microsoft-Windows-DistributedCOM (Event 10010)</td><td style="text-align:center"><b>2</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-19 19:06</td><td style="font-size:12px">DCOM 服务器未在超时时间内注册，通常是 UWP 应用延迟启动</td></tr>
+<tr><td style="font-size:12px">Service Control Manager (Event 7034)</td><td style="text-align:center"><b>1</b></td><td style="text-align:center"><span class="badge y">中</span></td><td style="font-size:12px;white-space:nowrap">2026-05-20 07:02</td><td style="font-size:12px">服务意外终止，未配置恢复操作</td></tr>
+<tr><td style="font-size:12px">Microsoft-Windows-WindowsUpdateClient (Event 20)</td><td style="text-align:center"><b>1</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-19 18:26</td><td style="font-size:12px">Installation Failure: Windows failed to install the following update with error 0xC1900208: Windows 11, version 25H2.</td></tr>
+<tr><td style="font-size:12px">Volsnap (Event 35)</td><td style="text-align:center"><b>1</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-19 18:14</td><td style="font-size:12px">The shadow copies of volume C: were aborted because the shadow copy storage failed to grow.</td></tr>
+</table>
+<p style="margin-bottom:10px;font-size:13px"><b>应用日志</b>: 共 <b>63</b> 条错误，7 类事件，时间范围 2026-05-09 20:28 ~ 2026-05-12 17:42</p>
+<table>
+<tr><th style="min-width:200px">问题</th><th style="width:60px">次数</th><th style="width:70px">严重程度</th><th>时间范围</th><th>说明</th></tr>
+<tr><td style="font-size:12px">SecurityCenter (Event 19)</td><td style="text-align:center"><b>25</b></td><td style="text-align:center"><span class="badge y">中</span></td><td style="font-size:12px;white-space:nowrap">2026-05-09 20:32</td><td style="font-size:12px">The Windows Security Center Service was unable to load instances of AntiVirusProduct from datastore.</td></tr>
+<tr><td style="font-size:12px">Office 2013 Licensing Service (Event 0)</td><td style="text-align:center"><b>11</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-10 00:48</td><td style="font-size:12px">The Windows Security Center Service was unable to load instances of AntiVirusProduct from datastore.</td></tr>
+<tr><td style="font-size:12px">Application Error (Event 1000)</td><td style="text-align:center"><b>8</b></td><td style="text-align:center"><span class="badge y">中</span></td><td style="font-size:12px;white-space:nowrap">2026-05-12 17:42</td><td style="font-size:12px">应用程序崩溃，查看故障模块定位根因</td></tr>
+<tr><td style="font-size:12px">VSS (Event 13)</td><td style="text-align:center"><b>7</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-09 20:28</td><td style="font-size:12px">Volume Shadow Copy Service information: The COM Server with CLSID {4e14fba2-2e22-11d1-9964-00c04fbbb345} and name CEvent</td></tr>
+<tr><td style="font-size:12px">.NET Runtime (Event 1022)</td><td style="text-align:center"><b>6</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-12 00:14</td><td style="font-size:12px">.NET Runtime version 4.0.30319.0 - 在初始化分析 API 附加基础结构时发生错误。此进程不允许附加探查器。HRESULT: 0x80004005。  进程 ID (十进制): 29460。消息 ID: [0</td></tr>
+<tr><td style="font-size:12px">VSS (Event 8193)</td><td style="text-align:center"><b>4</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-09 23:11</td><td style="font-size:12px">Volume Shadow Copy Service error: Unexpected error calling routine CoCreateInstance.  hr = 0x8007045b, 系统正在关机。</td></tr>
+<tr><td style="font-size:12px">Application Hang (Event 1002)</td><td style="text-align:center"><b>2</b></td><td style="text-align:center"><span class="badge gr">低</span></td><td style="font-size:12px;white-space:nowrap">2026-05-09 23:11</td><td style="font-size:12px">The program svchost.exe version 10.0.22621.1 stopped interacting with Windows and was closed. To see if more information</td></tr>
+</table>
+<h2 id="s10"><span>十</span>、风险评估与建议</h2>
+<div class="risk-box"><span style="font-size:13px;color:#555">综合风险等级：</span><span class="level">高</span></div>
+<h3>10.1 发现的问题</h3>
+<table><tr><th>序号</th><th>风险等级</th><th>问题描述</th></tr>
+<tr><td>1</td><td><span class="badge r">高</span></td><td>内存使用率过高</td></tr>
+<tr><td>2</td><td><span class="badge r">高</span></td><td>磁盘空间不足</td></tr>
+</table>
+<h3>10.2 安全建议</h3>
+<table><tr><th>优先级</th><th>建议措施</th></tr>
+<tr><td><span class="badge y">中</span></td><td>密码最短长度为 0，建议设置为至少 8 位: <code>net accounts /minpwlen:8</code></td></tr>
+<tr><td><span class="badge gr">低</span></td><td>未启用密码历史记录，建议设置: <code>net accounts /uniquepw:5</code></td></tr>
+<tr><td><span class="badge gr">低</span></td><td>未启用安全启动 (Secure Boot)，建议在 BIOS 中启用 UEFI + Secure Boot</td></tr>
+<tr><td><span class="badge gr">低</span></td><td>时间同步异常，建议配置 NTP: <code>w32tm /config /manualpeerlist:ntp.aliyun.com /syncfromflags:manual /update</code></td></tr>
+<tr><td><span class="badge gr">低</span></td><td>无可用系统还原点，建议启用系统保护并创建还原点</td></tr>
+</table>
+
+</div><!-- end .body -->
+<div class="footer">
+<b>Windows 系统巡检报告</b><br>
+巡检日期: 2026-05-20 &nbsp;&bull;&nbsp; 主机: liuge &nbsp;&bull;&nbsp; 生成时间: 2026-05-20 18:22:51<br>
+本报告由自动化巡检工具生成，仅供内部参考
+</div>
+</div></body></html>

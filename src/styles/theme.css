@@ -1,0 +1,251 @@
+/* ============================================
+   AutoInspection Design System
+   参考 shadcn/ui neutral 风格
+   ============================================ */
+
+/* ----- Light Theme (default) ----- */
+:root {
+  /* Backgrounds */
+  --app-bg: #ffffff;
+  --app-bg-soft: #f8f8f9;
+  --app-panel: #ffffff;
+  --app-border: #e5e5e5;
+  --app-border-soft: #f0f0f0;
+
+  /* Text */
+  --app-text: #171717;
+  --app-text-soft: #737373;
+  --app-text-muted: #a3a3a3;
+
+  /* Brand */
+  --app-primary: #2563eb;
+  --app-primary-fg: #ffffff;
+  --app-primary-soft: #eff6ff;
+  --app-primary-border: #bfdbfe;
+
+  /* Semantic */
+  --app-success: #16a34a;
+  --app-success-soft: #f0fdf4;
+  --app-warn: #d97706;
+  --app-warn-soft: #fffbeb;
+  --app-danger: #dc2626;
+  --app-danger-soft: #fef2f2;
+  --app-info: #6b7280;
+
+  /* Sidebar */
+  --app-sidebar-bg: #f8f8f9;
+  --app-sidebar-border: #e5e5e5;
+  --app-sidebar-accent: #ebebeb;
+  --app-sidebar-accent-fg: #171717;
+
+  /* Log Console */
+  --app-log-bg: #f8f9fa;
+  --app-log-info: #6b7280;
+  --app-log-warn: #d97706;
+  --app-log-error: #dc2626;
+  --app-log-ts: #9ca3af;
+
+  /* Shadows */
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --app-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --app-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+  /* Radius */
+  --app-radius: 12px;
+  --app-radius-sm: 6px;
+  --app-radius-xs: 4px;
+
+  /* ---- Element Plus Theme Overrides (Light) ---- */
+  --el-color-primary: #2563eb;
+  --el-color-primary-light-3: #60a5fa;
+  --el-color-primary-light-5: #93bbfd;
+  --el-color-primary-light-7: #bfdbfe;
+  --el-color-primary-light-8: #dbeafe;
+  --el-color-primary-light-9: #eff6ff;
+  --el-color-primary-dark-2: #1d4ed8;
+
+  --el-color-success: #16a34a;
+  --el-color-warning: #d97706;
+  --el-color-danger: #dc2626;
+  --el-color-info: #6b7280;
+
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #ffffff;
+  --el-bg-color-overlay: #ffffff;
+  --el-text-color-primary: #171717;
+  --el-text-color-regular: #404040;
+  --el-text-color-secondary: #737373;
+  --el-text-color-placeholder: #a3a3a3;
+  --el-border-color: #e5e5e5;
+  --el-border-color-light: #f0f0f0;
+  --el-border-color-lighter: #f5f5f5;
+  --el-fill-color: #f5f5f5;
+  --el-fill-color-light: #fafafa;
+  --el-fill-color-blank: #ffffff;
+
+  --el-border-radius-base: 6px;
+  --el-border-radius-small: 4px;
+
+  --el-disabled-bg-color: #f5f5f5;
+  --el-disabled-text-color: #a3a3a3;
+  --el-disabled-border-color: #e5e5e5;
+}
+
+/* ----- Dark Theme ----- */
+html.dark {
+  color-scheme: dark;
+
+  --app-bg: #0a0a0a;
+  --app-bg-soft: #171717;
+  --app-panel: #171717;
+  --app-border: #262626;
+  --app-border-soft: #1f1f1f;
+
+  --app-text: #fafafa;
+  --app-text-soft: #a3a3a3;
+  --app-text-muted: #737373;
+
+  --app-primary: #3b82f6;
+  --app-primary-fg: #ffffff;
+  --app-primary-soft: #1e3a5f;
+  --app-primary-border: #1e40af;
+
+  --app-success: #22c55e;
+  --app-success-soft: #052e16;
+  --app-warn: #f59e0b;
+  --app-warn-soft: #422006;
+  --app-danger: #ef4444;
+  --app-danger-soft: #450a0a;
+  --app-info: #9ca3af;
+
+  --app-sidebar-bg: #141414;
+  --app-sidebar-border: #262626;
+  --app-sidebar-accent: #1f1f1f;
+  --app-sidebar-accent-fg: #fafafa;
+
+  --app-log-bg: #0d1117;
+  --app-log-info: #8b949e;
+  --app-log-warn: #d29922;
+  --app-log-error: #f85149;
+  --app-log-ts: #484f58;
+
+  --app-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --app-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --app-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.35);
+
+  /* Element Plus Dark Overrides */
+  --el-color-primary: #3b82f6;
+  --el-color-primary-light-3: #2563eb;
+  --el-color-primary-light-5: #1d4ed8;
+  --el-color-primary-light-7: #1e40af;
+  --el-color-primary-light-8: #1e3a5f;
+  --el-color-primary-light-9: #172554;
+  --el-color-primary-dark-2: #60a5fa;
+
+  --el-color-success: #22c55e;
+  --el-color-warning: #f59e0b;
+  --el-color-danger: #ef4444;
+  --el-color-info: #9ca3af;
+
+  --el-bg-color: #171717;
+  --el-bg-color-page: #0a0a0a;
+  --el-bg-color-overlay: #1f1f1f;
+  --el-text-color-primary: #fafafa;
+  --el-text-color-regular: #d4d4d4;
+  --el-text-color-secondary: #a3a3a3;
+  --el-text-color-placeholder: #737373;
+  --el-border-color: #262626;
+  --el-border-color-light: #2a2a2a;
+  --el-border-color-lighter: #1f1f1f;
+  --el-fill-color: #262626;
+  --el-fill-color-light: #1f1f1f;
+  --el-fill-color-blank: #171717;
+
+  --el-disabled-bg-color: #1f1f1f;
+  --el-disabled-text-color: #525252;
+  --el-disabled-border-color: #262626;
+}
+
+/* ============================================
+   Base
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", -apple-system, system-ui, sans-serif;
+  background: var(--app-bg);
+  color: var(--app-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--app-text-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--app-text-soft);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.ai-page {
+  padding: 20px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  background: var(--app-bg);
+}
+
+.ai-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--app-text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.01em;
+}
+
+.ai-card {
+  background: var(--app-panel);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  padding: 18px 20px;
+  box-shadow: var(--app-shadow-sm);
+}
+
+.ai-muted {
+  color: var(--app-text-soft);
+  font-size: 13px;
+}
+
+.ai-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}

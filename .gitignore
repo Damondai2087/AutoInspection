@@ -1,0 +1,99 @@
+# ====================================
+# Dependencies
+# ====================================
+node_modules/
+
+# ====================================
+# Build Outputs
+# ====================================
+dist/
+dist-ssr/
+.vite/
+
+# ====================================
+# Rust / Cargo
+# ====================================
+src-tauri/target/
+*.pdb
+
+# ====================================
+# Built-in Portable Python
+# (large binary, fetched via scripts/fetch_python.sh before build)
+# ====================================
+src-tauri/resources/python/
+
+# ====================================
+# Python Cache
+# ====================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# ====================================
+# Environment & Secrets
+# ====================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ====================================
+# Logs
+# ====================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ====================================
+# OS Generated
+# ====================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ====================================
+# IDE & Editors
+# ====================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+
+# ====================================
+# Screenshots & Temp Dev Artifacts
+# ====================================
+screenshot*.png
+.playwright-cli/
+
+# ====================================
+# Testing & Coverage
+# ====================================
+coverage/
+.nyc_output/
+*.lcov
+
+# ====================================
+# Misc
+# ====================================
+*.local
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.tmp
+.cache/
