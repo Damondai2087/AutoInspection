@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { store } from "../store/app";
-import { getAppVersion } from "../api/inspection";
 import { onMounted, ref } from "vue";
-import { openPath } from "../api/inspection";
+import { Connection, Document, Setting } from "@element-plus/icons-vue";
+import { getAppVersion, openPath } from "../api/inspection";
 
 const version = ref<string>("");
 const repoUrl = "https://github.com/souvc/AutoInspection";
