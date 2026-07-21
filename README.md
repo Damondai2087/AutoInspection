@@ -2,6 +2,31 @@
 
 > 基于 Rust + Tauri v2 + Vue3 构建，整合 [Linux_Auto_Inspection](https://github.com/Aidan-996/Linux_Auto_Inspection) 与 [Windows_Auto_Inspection](https://github.com/Aidan-996/Windows_Auto_Inspection) 开源巡检脚本，一套客户端覆盖 Windows / Linux / macOS 主机巡检。
 
+### 本机巡检（浅色主题）
+
+<img src="images/01-local-light.png" alt="本机巡检" width="800">
+
+### 远程巡检（浅色主题）
+
+<img src="images/02-remote-light.png" alt="远程巡检" width="800">
+
+### 深色主题
+
+<img src="images/05-local-dark.png" alt="深色主题" width="800">
+
+<details>
+<summary>更多截图（历史报告、系统设置）</summary>
+
+**历史巡检记录**
+
+<img src="images/03-history-light.png" alt="历史报告" width="800">
+
+**系统设置**
+
+<img src="images/04-settings-light.png" alt="系统设置" width="800">
+
+</details>
+
 ---
 
 ## 为什么做这个
