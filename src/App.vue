@@ -6,11 +6,13 @@ import {
   Connection,
   Document,
   Setting,
+  InfoFilled,
 } from "@element-plus/icons-vue";
 import LocalInspection from "./views/LocalInspection.vue";
 import RemoteInspection from "./views/RemoteInspection.vue";
 import HistoryReport from "./views/HistoryReport.vue";
 import Settings from "./views/Settings.vue";
+import About from "./views/About.vue";
 import {
   store,
   pushLog,
@@ -143,7 +145,17 @@ function onNavClick(index: string) {
           <span class="foot-dot" :class="store.osInfo.platform"></span>
           <span>{{ store.osInfo.name || "检测中" }}</span>
         </div>
-        <span v-if="appVersion" class="foot-ver">v{{ appVersion }}</span>
+        <div class="foot-right">
+          <span v-if="appVersion" class="foot-ver">v{{ appVersion }}</span>
+          <button
+            class="foot-about-btn"
+            :class="{ active: store.activeNav === 'about' }"
+            @click="onNavClick('about')"
+            title="关于"
+          >
+            <el-icon :size="14"><InfoFilled /></el-icon>
+          </button>
+        </div>
       </div>
     </aside>
 
@@ -153,6 +165,7 @@ function onNavClick(index: string) {
       <RemoteInspection v-else-if="store.activeNav === 'remote'" />
       <HistoryReport v-else-if="store.activeNav === 'history'" />
       <Settings v-else-if="store.activeNav === 'settings'" />
+      <About v-else-if="store.activeNav === 'about'" />
     </main>
   </div>
 </template>
@@ -277,6 +290,37 @@ function onNavClick(index: string) {
 .foot-ver {
   font-size: 11px;
   opacity: 0.6;
+}
+
+.foot-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.foot-about-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--app-text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.foot-about-btn:hover {
+  background: var(--app-sidebar-accent);
+  color: var(--app-text);
+}
+
+.foot-about-btn.active {
+  background: var(--app-primary-soft);
+  color: var(--app-primary);
 }
 
 .foot-dot {
