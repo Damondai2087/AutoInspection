@@ -4,8 +4,8 @@ import { Connection, Document, Setting } from "@element-plus/icons-vue";
 import { getAppVersion, openPath } from "../api/inspection";
 
 const version = ref<string>("");
-const repoUrl = "https://github.com/souvc/AutoInspection";
-const issuesUrl = "https://github.com/souvc/AutoInspection/issues";
+const repoUrl = "https://github.com/Damondai2087/AutoInspection";
+const issuesUrl = "https://github.com/Damondai2087/AutoInspection/issues";
 
 onMounted(async () => {
   try { version.value = await getAppVersion(); } catch { /* ignore */ }
@@ -44,7 +44,7 @@ function open(url: string) {
           <el-icon style="margin-right: 6px"><Document /></el-icon>
           提交 Issue
         </el-button>
-        <el-button @click="open('https://github.com/souvc/AutoInspection/releases')">
+        <el-button @click="open('https://github.com/Damondai2087/AutoInspection/releases')">
           <el-icon style="margin-right: 6px"><Setting /></el-icon>
           查看更新
         </el-button>
